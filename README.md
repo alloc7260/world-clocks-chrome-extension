@@ -1,6 +1,16 @@
-# World Clocks - Chrome Extension (Manifest V3)
+<p align="center">
+  <img src="assets/icons/icon-128.png" alt="World Clocks icon" width="96" height="96" />
+</p>
+
+<h1 align="center">World Clocks - Chrome Extension (Manifest V3)</h1>
 
 A minimalistic, zero-dependency Chrome Extension for viewing multiple world timezones at a glance. Features side-by-side simple Analog (HMS hands) and Digital (`00:00:00 AM/PM`) clocks, a responsive Analog-only grid layout, live city search with `+` / red `×` actions, hidden scrollbars, and Dark/Light theme support.
+
+## Screenshots
+
+![Analog + digital list in dark mode next to the analog-only grid in light mode](store-assets/screenshot-1.jpeg)
+
+![Cyberpunk theme next to the Appearance panel with colour themes, fandom themes, and fonts](store-assets/screenshot-2.jpeg)
 
 ---
 
