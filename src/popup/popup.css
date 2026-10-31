@@ -960,6 +960,12 @@ body {
   background: var(--bg-surface-hover);
 }
 
+/* Lets elementFromPoint see the card underneath while dragging. */
+.clock-card.is-dragging {
+  z-index: 10;
+  pointer-events: none;
+}
+
 /* 1. LEFT: Bigger Simple Analog Clock (HMS Hands) */
 .analog-clock {
   width: 62px;

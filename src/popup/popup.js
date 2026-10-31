@@ -558,9 +558,106 @@
   }
 
   /**
+   * Press and hold a clock card for 1s, then drag to reorder (works in list and grid).
+   */
+  function initDragReorder() {
+    const LONG_PRESS_MS = 1000;
+    const MOVE_CANCEL_PX = 6;
+    const viewport = document.getElementById('clocks-viewport');
+
+    let pressTimer = null;
+    let pendingCard = null;
+    let startX = 0;
+    let startY = 0;
+    let drag = null;
+
+    function cancelPress() {
+      clearTimeout(pressTimer);
+      pressTimer = null;
+      pendingCard = null;
+    }
+
+    function startDrag() {
+      const card = pendingCard;
+      const rect = card.getBoundingClientRect();
+      drag = { card, grabX: startX - rect.left, grabY: startY - rect.top, dx: 0, dy: 0 };
+      pressTimer = null;
+      pendingCard = null;
+      card.classList.add('is-dragging');
+    }
+
+    // Recompute translate from the card's untransformed slot so it stays under the pointer after DOM moves.
+    function positionCard(x, y) {
+      const rect = drag.card.getBoundingClientRect();
+      const layoutX = rect.left - drag.dx;
+      const layoutY = rect.top - drag.dy;
+      drag.dx = x - drag.grabX - layoutX;
+      drag.dy = y - drag.grabY - layoutY;
+      drag.card.style.transform = `translate(${drag.dx}px, ${drag.dy}px)`;
+    }
+
+    async function endDrag() {
+      cancelPress();
+      if (!drag) return;
+      drag.card.classList.remove('is-dragging');
+      drag.card.style.transform = '';
+      drag = null;
+
+      const order = Array.from(clocksListEl.querySelectorAll('.clock-card')).map(
+        (c) => c.dataset.clockId
+      );
+      state.clocks.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+      await storageApi.saveState(state);
+    }
+
+    clocksListEl.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0) return;
+      const card = e.target.closest('.clock-card');
+      if (!card) return;
+      startX = e.clientX;
+      startY = e.clientY;
+      pendingCard = card;
+      pressTimer = setTimeout(startDrag, LONG_PRESS_MS);
+    });
+
+    document.addEventListener('pointermove', (e) => {
+      if (pendingCard) {
+        if (Math.hypot(e.clientX - startX, e.clientY - startY) > MOVE_CANCEL_PX) {
+          cancelPress();
+        }
+        return;
+      }
+      if (!drag) return;
+      e.preventDefault();
+
+      const under = document.elementFromPoint(e.clientX, e.clientY);
+      const target = under && under.closest('.clock-card');
+      if (target && target !== drag.card) {
+        const cards = Array.from(clocksListEl.children);
+        const movingForward = cards.indexOf(drag.card) < cards.indexOf(target);
+        clocksListEl.insertBefore(drag.card, movingForward ? target.nextSibling : target);
+      }
+
+      const vr = viewport.getBoundingClientRect();
+      if (e.clientY < vr.top + 24) {
+        viewport.scrollTop -= 8;
+      } else if (e.clientY > vr.bottom - 24) {
+        viewport.scrollTop += 8;
+      }
+
+      positionCard(e.clientX, e.clientY);
+    });
+
+    document.addEventListener('pointerup', endDrag);
+    document.addEventListener('pointercancel', endDrag);
+  }
+
+  /**
    * Sets up event listeners for checkboxes, theme button, and search controls.
    */
   function bindEvents() {
+    initDragReorder();
+
     // Analog checkbox change (enforce at least one mode selected)
     chkAnalog.addEventListener('change', async () => {
       if (!chkAnalog.checked && !state.modes.digital) {

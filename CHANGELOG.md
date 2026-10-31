@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Appearance panel (palette button in header) with 9 colour themes, 12 fandom-inspired themes (Cyberpunk, Black Pink, Pocket Trainer, Superhero, Spider Hero, Vigilante, Hacker, Synthwave, Galaxy, Halloween, Shinobi, Dracula), and 8 clock fonts.
 - Distinct AM and PM colours per theme.
+- Reorder clocks by pressing and holding a clock for 1 second, then dragging (list and grid).
 - `src/popup/themes.js` catalog for themes and fonts.
 
 ### Changed

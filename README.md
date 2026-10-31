@@ -22,6 +22,8 @@ A minimalistic, zero-dependency Chrome Extension for viewing multiple world time
   - Instant theme toggle button in the header; works seamlessly across all modes and persists automatically.
 - **Appearance Panel** (palette button):
   - 9 colour themes, 12 fandom-inspired themes, and 8 clock fonts; AM and PM use distinct colours.
+- **Reorder Clocks**:
+  - Press and hold a clock for 1 second, then drag it to a new position (order is saved).
 - **Hidden Scrollbars**:
   - Smooth vertical scrolling when your clock list grows long, with scrollbars completely hidden.
 
