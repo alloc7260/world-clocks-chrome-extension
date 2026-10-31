@@ -1,0 +1,17 @@
+# Build & release artifacts
+dist/
+*.zip
+*.crx
+*.pem
+
+# Dependencies & OS files
+node_modules/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+.idea/
