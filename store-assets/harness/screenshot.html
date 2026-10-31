@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>World Clocks - Store Screenshot</title>
+  <!--
+    Render with headless Chrome/Edge (see scripts/screenshots.ps1):
+    --allow-file-access-from-files is required so this page can drive the popup iframes.
+  -->
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 1280px;
+      height: 800px;
+      overflow: hidden;
+      font-family: -apple-system, "Segoe UI", Inter, Roboto, sans-serif;
+      color: #f8fafc;
+      background: radial-gradient(1200px 700px at 15% 0%, #1e3a5f 0%, transparent 60%),
+        radial-gradient(900px 600px at 100% 100%, #3b1d5e 0%, transparent 60%),
+        #0b1120;
+    }
+    body.neon {
+      background: radial-gradient(1000px 600px at 0% 0%, #3a3500 0%, transparent 55%),
+        radial-gradient(900px 600px at 100% 100%, #4a0b2a 0%, transparent 60%),
+        #07070c;
+    }
+    header {
+      text-align: center;
+      padding-top: 30px;
+      height: 130px;
+    }
+    h1 {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    p {
+      margin-top: 10px;
+      font-size: 19px;
+      color: #cbd5e1;
+    }
+    .stage {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      /* 60px visual gap + 85px growth from scale(1.22) on a 386px frame */
+      gap: 145px;
+    }
+    .frame {
+      width: 386px;
+      height: 514px;
+      transform: scale(1.22);
+      transform-origin: top center;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0b1120;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+    iframe {
+      width: 386px;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="title"></h1>
+    <p id="sub"></p>
+  </header>
+  <div class="stage">
+    <div class="frame" id="left"></div>
+    <div class="frame" id="right"></div>
+  </div>
+  <script>
+    const CLOCKS = [
+      { id: 'new-york__america-new-york', city: 'New York', country: 'United States', timeZone: 'America/New_York' },
+      { id: 'london__europe-london', city: 'London', country: 'United Kingdom', timeZone: 'Europe/London' },
+      { id: 'dubai__asia-dubai', city: 'Dubai', country: 'United Arab Emirates', timeZone: 'Asia/Dubai' },
+      { id: 'mumbai__asia-kolkata', city: 'Mumbai', country: 'India', timeZone: 'Asia/Kolkata' },
+      { id: 'singapore__asia-singapore', city: 'Singapore', country: 'Singapore', timeZone: 'Asia/Singapore' },
+      { id: 'tokyo__asia-tokyo', city: 'Tokyo', country: 'Japan', timeZone: 'Asia/Tokyo' },
+      { id: 'sydney__australia-sydney', city: 'Sydney', country: 'Australia', timeZone: 'Australia/Sydney' }
+    ];
+
+    const SHOTS = {
+      1: {
+        title: 'Your world, at a glance',
+        sub: 'Analog + digital side by side, or a clean analog grid. Search any city, drag to reorder.',
+        left: { theme: 'dark', palette: 'slate', font: 'sans', modes: { analog: true, digital: true } },
+        right: { theme: 'light', palette: 'slate', font: 'sans', modes: { analog: true, digital: false } }
+      },
+      2: {
+        title: 'Make it yours',
+        sub: '21 themes, 8 clock fonts, dark & light modes, distinct AM / PM colours.',
+        bodyClass: 'neon',
+        left: { theme: 'dark', palette: 'cyberpunk', font: 'condensed', modes: { analog: true, digital: true } },
+        right: { theme: 'dark', palette: 'cyberpunk', font: 'condensed', modes: { analog: true, digital: true } },
+        openSettingsRight: true
+      }
+    };
+
+    const shot = SHOTS[new URLSearchParams(location.search).get('shot')] || SHOTS[1];
+    document.getElementById('title').textContent = shot.title;
+    document.getElementById('sub').textContent = shot.sub;
+    if (shot.bodyClass) document.body.classList.add(shot.bodyClass);
+
+    // Popups read state on load, so each iframe is created only after its state is written.
+    function mountPopup(slotId, state) {
+      return new Promise((resolve) => {
+        localStorage.setItem('world_clocks_state_v1', JSON.stringify({ clocks: CLOCKS, ...state }));
+        const iframe = document.createElement('iframe');
+        iframe.src = '../../src/popup/popup.html';
+        iframe.addEventListener('load', () => setTimeout(() => resolve(iframe), 150));
+        document.getElementById(slotId).appendChild(iframe);
+      });
+    }
+
+    (async () => {
+      await mountPopup('left', shot.left);
+      const right = await mountPopup('right', shot.right);
+      if (shot.openSettingsRight) {
+        right.contentDocument.getElementById('btn-settings').click();
+      }
+    })();
+  </script>
+</body>
+</html>

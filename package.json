@@ -6,6 +6,7 @@
   "scripts": {
     "icons": "node scripts/generate-icons.js",
     "pack": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package.ps1",
+    "screenshots": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/screenshots.ps1",
     "validate": "node scripts/validate.js"
   },
   "keywords": [
