@@ -11,10 +11,10 @@ World Clocks is intentionally built with **zero runtime dependencies** using sta
 1. **`src/popup/timezones.js` (`window.WorldClockTimezones`)**
    - Combines a curated catalog of major global cities (`CURATED_CITIES`) with `Intl.supportedValuesOf('timeZone')` so every valid IANA timezone is searchable offline.
    - Provides pure helper functions:
-     - `searchTimezones(query, limit)` — Ranked search across city names, countries, keywords, and IANA IDs.
-     - `getFormattedDigitalTime(timeZone, now)` — Returns `{ hms, period, full }` in strict `00:00:00 AM/PM` format.
-     - `getClockAngles(timeZone, now)` — Returns `{ hourDeg, minuteDeg, secondDeg }` for SVG hand rotation.
-     - `getRelativeMeta(timeZone, now)` — Returns `{ dayLabel, offsetLabel, subtitle }` (e.g., `Today • GMT+5:30`).
+     - `searchTimezones(query, limit)` - Ranked search across city names, countries, keywords, and IANA IDs.
+     - `getFormattedDigitalTime(timeZone, now)` - Returns `{ hms, period, full }` in strict `00:00:00 AM/PM` format.
+     - `getClockAngles(timeZone, now)` - Returns `{ hourDeg, minuteDeg, secondDeg }` for SVG hand rotation.
+     - `getRelativeMeta(timeZone, now)` - Returns `{ dayLabel, offsetLabel, subtitle }` (e.g., `Today • GMT+5:30`).
 
 2. **`src/popup/storage.js` (`window.WorldClockStorage`)**
    - Persists state under key `world_clocks_state_v1` in `chrome.storage.sync` (with automatic `localStorage` fallback when opening `src/popup/popup.html` directly in a browser tab during UI development).
@@ -54,7 +54,7 @@ Edit `CURATED_CITIES` in `src/popup/timezones.js`:
 ### 2. Customizing Themes or Adding New Color Palettes
 - **Fandom themes**: add an entry to `FANDOM_THEMES` in `src/popup/themes.js` (`bg`, `accent`, `hour`, `am`, `pm`, optional `glow`). Dark/light surfaces are derived automatically in `popup.css`.
 - **Colour themes**: add to `COLOR_THEMES` in `themes.js` and a matching `[data-palette]` block in `popup.css`.
-- **Fonts**: add to `FONT_OPTIONS` in `themes.js` (local font stacks only — no remote fonts).
+- **Fonts**: add to `FONT_OPTIONS` in `themes.js` (local font stacks only - no remote fonts).
 
 All surfaces, borders, text colors, and clock hand colors use CSS custom properties.
 

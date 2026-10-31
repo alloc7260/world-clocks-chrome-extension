@@ -1,4 +1,4 @@
-# World Clocks — Chrome Extension (Manifest V3)
+# World Clocks - Chrome Extension (Manifest V3)
 
 A minimalistic, zero-dependency Chrome Extension for viewing multiple world timezones at a glance. Features side-by-side simple Analog (HMS hands) and Digital (`00:00:00 AM/PM`) clocks, a responsive Analog-only grid layout, live city search with `+` / red `×` actions, hidden scrollbars, and Dark/Light theme support.
 

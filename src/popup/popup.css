@@ -1,5 +1,5 @@
 /* ==========================================================================
-   World Clocks Chrome Extension — 9 Themes × Dark/Light Modes & Tight Layout
+   World Clocks Chrome Extension - 9 Themes × Dark/Light Modes & Tight Layout
    ========================================================================== */
 
 :root,
@@ -306,7 +306,7 @@
 }
 
 /* ==========================================================================
-   Fandom Themes — surfaces derived from --t-* vars injected by popup.js
+   Fandom Themes - surfaces derived from --t-* vars injected by popup.js
    ========================================================================== */
 :root[data-kind="fandom"][data-theme="dark"] {
   --bg-app: var(--t-bg);
@@ -398,7 +398,7 @@ body {
   display: none !important;
 }
 
-/* App Shell — Minimal Whitespace */
+/* App Shell - Minimal Whitespace */
 .app-shell {
   display: flex;
   flex-direction: column;
@@ -1011,7 +1011,7 @@ body {
   fill: var(--hand-second);
 }
 
-/* 2. MIDDLE: Digital Clock (00:00:00 AM/PM) — sized to fill the card */
+/* 2. MIDDLE: Digital Clock (00:00:00 AM/PM) - sized to fill the card */
 .digital-clock {
   flex: 1 0 auto;
   display: flex;

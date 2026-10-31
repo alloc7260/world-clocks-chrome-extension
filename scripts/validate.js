@@ -44,6 +44,19 @@ try {
     console.error('[INVALID] action.default_popup is required');
     hasErrors = true;
   }
+  // Chrome Web Store upload limits.
+  if (!manifest.description || manifest.description.length > 132) {
+    console.error(`[INVALID] description must be 1-132 chars (got ${(manifest.description || '').length})`);
+    hasErrors = true;
+  }
+  if (!manifest.name || manifest.name.length > 75) {
+    console.error(`[INVALID] name must be 1-75 chars (got ${(manifest.name || '').length})`);
+    hasErrors = true;
+  }
+  if (manifest.short_name && manifest.short_name.length > 12) {
+    console.error(`[INVALID] short_name must be <= 12 chars (got ${manifest.short_name.length})`);
+    hasErrors = true;
+  }
   console.log(`Validated Manifest V3: "${manifest.name}" v${manifest.version}`);
 } catch (err) {
   console.error(`[ERROR] Failed to parse manifest.json: ${err.message}`);

@@ -1,4 +1,4 @@
-# Privacy Policy — World Clocks Chrome Extension
+# Privacy Policy - World Clocks Chrome Extension
 
 **Last Updated:** October 31, 2026
 

@@ -1,6 +1,6 @@
 /**
  * Timezone & City Catalog and Time Calculation Utilities
- * Zero external dependencies — powered by native ECMAScript Intl API.
+ * Zero external dependencies - powered by native ECMAScript Intl API.
  */
 
 const CURATED_CITIES = [

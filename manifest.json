@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "World Clocks — Minimal Analog & Digital Timezones",
+  "name": "World Clocks - Minimal Analog & Digital Timezones",
   "short_name": "World Clocks",
-  "version": "1.1.0",
-  "description": "Minimalistic world clock popup with side-by-side analog & digital clocks, responsive analog grid, instant city search, and dark/light themes.",
+  "version": "1.1.1",
+  "description": "Minimal world clocks: analog & digital side by side, city search, themes, fonts, and dark/light modes.",
   "action": {
     "default_title": "World Clocks",
     "default_popup": "src/popup/popup.html",
