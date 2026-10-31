@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "World Clocks - Minimal Analog & Digital Timezones",
   "short_name": "World Clocks",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Minimal world clocks: analog & digital side by side, city search, themes, fonts, and dark/light modes.",
   "action": {
     "default_title": "World Clocks",
