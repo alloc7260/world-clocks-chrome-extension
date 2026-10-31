@@ -11,16 +11,16 @@
 
 ## Local Preferences Storage
 - The extension uses Chrome's built-in `chrome.storage.sync` API solely to save your preferences:
-  1. Your configured list of cities/timezones
-  2. Your selected theme (`dark` or `light`)
+  1. Your configured list of cities/timezones and their order
+  2. Your selected mode (`dark` or `light`), colour theme, and clock font
   3. Your selected clock display modes (`analog` and/or `digital`)
 - This data remains within your browser and Google Chrome sync profile and is never accessible to the developer or any third party.
 
 ## Third-Party Services
-World Clocks does not integrate any third-party SDKs, trackers, advertisements, or remote scripts.
+World Clocks does not integrate any third-party SDKs, trackers, advertisements, remote scripts, or remote fonts.
 
 ## Changes to This Policy
-Any future updates to this Privacy Policy will be documented in the repository and updated with a new effective date.
+Any future updates to this Privacy Policy will be published at this same address with a new "Last Updated" date.
 
 ## Contact
-If you have questions regarding this privacy policy, please open an issue in the project repository.
+If you have questions about this privacy policy, contact the developer using the support email listed on the World Clocks Chrome Web Store page.
